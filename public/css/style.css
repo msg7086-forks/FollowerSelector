@@ -1,0 +1,32 @@
+html, body, button, input, select, textarea {
+  font-family: "Microsoft Yahei", sans-serif;
+}
+
+#upload {
+  margin-top: 5%;
+}
+#upload textarea {
+  font-size: 8px;
+}
+
+.color-2 { color: #10aa00!important;}
+.color-3 { color: #0070dd!important;}
+.color-4 { color: #7325ae!important;}
+.enabled-false { text-decoration: line-through;}
+
+@media only screen and (max-width: 979px) {
+  #left-panel {
+    position: fixed;
+    left: 0; right: 0; top: 0; width: auto;
+    min-height: 0;
+  }
+  #left-panel .login-info {
+    display: none;
+  }
+  #left-panel > nav > ul > li {
+    float: left;
+  }
+  #main {
+    margin-top: 64px;
+  }
+}

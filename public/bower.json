@@ -1,0 +1,24 @@
+{
+  "name": "rhfs",
+  "version": "0.0.1",
+  "authors": [
+    "msg7086 <msg7086@gmail.com>"
+  ],
+  "description": "Rabbit House Follower Selector",
+  "license": "GPL",
+  "homepage": "fs.7086.in",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1.x",
+    "angular-route": "1.x",
+    "bootstrap": "3.x",
+    "fontawesome": "4.x"
+  }
+}
