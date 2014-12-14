@@ -1,23 +1,23 @@
 module RabbitHouse
-  class T630API < Grape::API
+  class T645API < Grape::API
     helpers do
       include Prob
     end
-    resource :t630 do
+    resource :t645 do
       params do
         requires :uuid, type: String, desc: 'Unique User ID'
       end
       get do
-        skills = ["1268", "0166", "0258", "0117", "1468", "0025", "0358", "0036", "0268", "0145", "3458"]
+        skills = ['012568', '334578', '002467', '015668']
 
         uuid = params[:uuid]
         error! ['Unknown UID'], 404 if uuid.size != 16
 
         fs = $redis.get(uuid)
         error! ['Unknown UID'], 404 if fs.nil?
-        $perm[:t630] ||= permutation skills
-        perm = $perm[:t630]
-
+        $perm[:t645] ||= permutation skills
+        perm = $perm[:t645]
+        
         fs_data = YAML.load(fs)
         people_index = convert_follower_skills fs_data
         skills = check_coverage perm, *people_index

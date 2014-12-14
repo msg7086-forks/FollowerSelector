@@ -7,7 +7,8 @@
     <ul>
       <li><a href="" ng-click="active='basic'"><i class="fa fa-lg fa-fw fa-map-marker"></i> 基本数据</a></li>
       <li><a href="" ng-click="active='skill'"><i class="fa fa-lg fa-fw fa-map-marker"></i> 技能覆盖</a></li>
-      <li><a href="" ng-click="active='t630'"><i class="fa fa-lg fa-fw fa-map-marker"></i> 高等任务覆盖</a></li>
+      <li><a href="" ng-click="show_cov(630)"><i class="fa fa-lg fa-fw fa-map-marker"></i> 630任务覆盖</a></li>
+      <li><a href="" ng-click="show_cov(645)"><i class="fa fa-lg fa-fw fa-map-marker"></i> 645任务覆盖</a></li>
       <li><a href="#/" ng-click="clear()"><i class="fa fa-lg fa-fw fa-refresh"></i> 重新上传</a></li>
     </ul>
   </nav>
@@ -53,26 +54,31 @@
       </table>
     </div>
   </div>
-  <div id="t630" class="limit1200" ng-show="active == 't630'">
+  <div id="cov" class="limit1200" ng-show="active == 'cov'">
     <h1 class="txt-color-blueDark">
-      <i class="fa-fw fa fa-map-marker"></i> 高等任务覆盖
+      <i class="fa-fw fa fa-map-marker"></i> 高等任务覆盖 ({{ilvl}} 装等)
     </h1>
     <div class="well">
       <table class="table table-striped table-forum">
         <thead><tr>
           <th class="col-xs-7">随从</th>
-          <th class="col-xs-3">覆盖度</th>
+          <th class="col-xs-3">完全匹配程度</th>
           <th class="col-xs-2">装等</th>
         </tr></thead>
         <tbody>
-          <tr ng-repeat="f in t630[0] | orderBy:['-coverage','-level']">
+          <tr ng-repeat="f in cov[ilvl][0] | orderBy:['-coverage','-level']">
             <td class="color-{{f.color}} enabled-{{f.enabled}}">{{f.name}} ({{f.level}}级) [ <span ng-repeat="s in f.skills">{{s}} </span>]</td>
             <td>{{f.coverage}}</td>
             <td>{{f.equipment}}</td>
           </tr>
         </tbody>
+        <thead><tr>
+          <th class="col-xs-7">随从</th>
+          <th class="col-xs-3">成长可能性</th>
+          <th class="col-xs-2">装等</th>
+        </tr></thead>
         <tbody>
-          <tr ng-repeat="f in t630[1] | orderBy:['-coverage','-level']">
+          <tr ng-repeat="f in cov[ilvl][1] | orderBy:['-coverage','-level']">
             <td class="color-{{f.color}} enabled-{{f.enabled}}">{{f.name}} ({{f.level}}级 {{f.klass}}) [ <span>{{f.skills[0]}}</span> ]</td>
             <td>{{f.coverage}}</td>
             <td>{{f.equipment}}</td>
@@ -86,7 +92,7 @@
           <th class="col-xs-9">需求配套技能</th>
         </tr></thead>
         <tbody>
-          <tr ng-repeat="(k,v) in t630[2]">
+          <tr ng-repeat="(k,v) in cov[ilvl][2]">
             <td>{{k}}</td>
             <td><span ng-repeat="x in v">{{x[0]}}x{{x[1]}} </span></td>
           </tr>

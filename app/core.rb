@@ -9,5 +9,6 @@ module RabbitHouse
     mount RabbitHouse::BasicAPI
     mount RabbitHouse::SkillAPI
     mount RabbitHouse::T630API
+    mount RabbitHouse::T645API
   end
 end

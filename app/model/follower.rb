@@ -15,7 +15,7 @@ class Follower
   end
   def possible_coverage skill, cov
     # Test klass before add coverage
-    self.coverage += cov if Follower.cover? self.klass, skill[0]
+    self.coverage += cov if Follower.cover? self.klass, Skill.cn(skill)[0]
   end
   def self.cover? klass, skill
     if klass['死亡骑士']
