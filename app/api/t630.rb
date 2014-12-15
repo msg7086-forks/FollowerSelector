@@ -24,8 +24,7 @@ module RabbitHouse
 
         # Return Purple Followers; Green Followers; Skill Demands
         people = fs_data.map(&:to_hash).partition { |f| f[:color] == 4 }
-        people <<= skills
-        people
+        people + skills
       end
     end
   end
