@@ -25,6 +25,6 @@ class Skill
     @@en[@id]
   end
   def self.cn id
-    @@cn[id]
+    Array === id ? id.map { |i| @@cn[i] } : @@cn[id]
   end
 end

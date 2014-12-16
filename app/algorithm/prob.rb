@@ -29,19 +29,21 @@ module Prob
   def check_coverage perm, people4_index, people2_index
     # Now check coverage
     skill_index = Array.new(9) { Array.new(9, 0) }
-    missions_combination_list = []
+    missions_combinations = []
     perm.each_with_index do |t, mid|
+      maxhit = 0
+      mission_combinations = []
       t.each do |p|
         combination = []
         hit = 0
         p.chars.each_slice(2).map(&:join).each do |key|
-          key_t = key.chars.map(&:to_i).map{|k|Skill.cn k}
+          key_t = Skill.cn key.chars.map(&:to_i)
           # Check if any purple followers cover the task
           if people4_index[key].size > 0
             # Yay!
             people4_index[key].each { |ppl| ppl.coverage += 2.0 / t.size }
             # No more check on this combination
-            combination << {skill: key_t, encounter: people4_index[key].map(&:name)}
+            combination.unshift skill: key_t, encounter: people4_index[key].map{|p| [p.name, p.equipment]}
             hit += 1
             next
           end
@@ -53,7 +55,13 @@ module Prob
           end
           combination << {skill: key_t, encounter: []}
         end
-        missions_combination_list << {id: mid + 1, hit: hit, combination: combination} if hit > 0
+        mission_combinations << {id: mid + 1, hit: hit, combination: combination} if hit > 0
+        maxhit = [hit, maxhit].max
+      end
+      if maxhit > 0
+        missions_combinations += mission_combinations.select {|combi| combi[:hit] >= maxhit}
+      else
+        missions_combinations << {id: mid + 1, hit: 0, combination: [{skill: Skill.cn(t.first.chars.map(&:to_i)), encounter: []}]}
       end
     end
     skills = {}
@@ -62,6 +70,6 @@ module Prob
       v.each_with_index { |item, i| sk <<= [Skill.cn(i), item] if item > 0}
       skills[Skill.cn(k)] = sk.sort_by(&:last).reverse
     end
-    [skills, missions_combination_list]
+    [skills, missions_combinations]
   end
 end
