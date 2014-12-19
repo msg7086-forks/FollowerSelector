@@ -1,5 +1,9 @@
 var Rise = angular.module('Rise',[]);
 
+$(function() {
+    $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+});
+
 Rise.controller('Rise', ['$scope', '$routeParams', '$http', '$location',
 function ($scope, $routeParams, $http, $location) {
   $scope.uuid = $routeParams.uuid
@@ -9,6 +13,7 @@ function ($scope, $routeParams, $http, $location) {
   $scope.init = function () {
     $scope.load_basic()
     $scope.load_skill()
+    $scope.load_rare()
     $scope.load_cov(630)
     $scope.load_cov(645)
   }
@@ -22,6 +27,12 @@ function ($scope, $routeParams, $http, $location) {
     $http.get('/api/skill', {params: {uuid: $scope.uuid}})
       .success(function(data) {
         $scope.skill = data
+      })
+  }
+  $scope.load_rare = function () {
+    $http.get('/api/rare', {params: {uuid: $scope.uuid}})
+      .success(function(data) {
+        $scope.rare = data
       })
   }
   $scope.load_cov = function (ilvl) {

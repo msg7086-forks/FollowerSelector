@@ -13,15 +13,10 @@ html, body, button, input, select, textarea {
 .color-3 { color: #0070dd!important;}
 .color-4 { color: #7325ae!important;}
 .enabled-false, .ilevel-false { text-decoration: line-through;}
-.match-true img {
-  background-image: url(/img/ability-countered.png)
-}
-.match-container {
-  position: relative;
-}
-img.match {
+.match-true img.match {
+  background-image: url(/img/ability-countered.png);
   position: absolute;
-  left: 8px; top: 8px;
+  left: 16px; top: 8px;
   border: none !important;
   outline: none !important;
 }
@@ -29,6 +24,7 @@ img.match {
 .skill-list img { 
   border: 1px solid #FFFFFF;
   outline: 1px solid #BFBFBF;
+  margin-right: 4px;
 }
 .spacing {
   margin-right: 4px;
