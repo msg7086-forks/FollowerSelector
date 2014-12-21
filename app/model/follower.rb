@@ -1,13 +1,17 @@
 class Follower
-  attr_accessor :name, :klass, :color, :level, :equipment, :enabled, :skills, :traits, :coverage
-  def initialize csv
-    self.name, self.klass, c, l, eq, en, s1, s2, t1, t2, t3 = csv.strip.split ','
-    self.skills = [s1, s2] - [nil, '']
-    self.traits = [t1, t2, t3] - [nil, '']
-    self.enabled = en.empty? # empty equals enabled
-    self.color = c.to_i
-    self.level = l.to_i
-    self.equipment = eq.to_i
+  attr_accessor :name, :race, :klass, :color, :level, :equipment, :enabled, :skills, :traits, :coverage
+  def initialize csv, schema
+    data = Hash[schema.split(',').zip csv.split(',')]
+    self.name = data['姓名']
+    self.race = data['种族']
+    self.klass = data['职业']
+    self.color = data['品质'].to_i
+    self.level = data['等级'].to_i
+    self.equipment = data['装等'].to_i
+    self.enabled = data['激活'].empty? || data['激活'] == '1'
+
+    self.skills = [data['技能1'], data['技能2']] - [nil, '']
+    self.traits = [data['特长1'], data['特长2'], data['特长3']] - [nil, '']
     self.coverage = 0.0
   end
   def to_s
