@@ -13,6 +13,7 @@ html, body, button, input, select, textarea {
 .color-3 { color: #0070dd!important;}
 .color-4 { color: #7325ae!important;}
 .color-5 { color: #ff8000!important;}
+.color-6 { color: #ff4040!important;}
 .enabled-false, .ilevel-false { text-decoration: line-through;}
 .match-true img.match {
   background-image: url(/img/ability-countered.png);
